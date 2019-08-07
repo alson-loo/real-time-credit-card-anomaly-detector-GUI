@@ -4,19 +4,19 @@ This is my final capstone project which implements a GUI for a role-based system
 
 **System Architecture**
 
-![1565181997797](C:\Users\Al_Laptop\AppData\Roaming\Typora\typora-user-images\1565181997797.png)
+
 
 
 
 **Screen Design**
 
-![1565182035508](C:\Users\Al_Laptop\AppData\Roaming\Typora\typora-user-images\1565182035508.png)
+
 
 
 
 **User Guide**
 
-## ![1565182933954](C:\Users\Al_Laptop\AppData\Roaming\Typora\typora-user-images\1565182933954.png)
+
 
 **Installation**
 
