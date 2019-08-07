@@ -15,6 +15,8 @@ This is my final capstone project which implements a GUI for a role-based system
 
 
 **User Guide**
+Please download the kaggle credit card fraud dataset and place the csv file in the data folder before use.
+https://www.kaggle.com/mlg-ulb/creditcardfraud/version/3
 
 ![alt text](https://github.com/alson-loo/real-time-credit-card-anomaly-detector-GUI/blob/master/user_guide.png)
 
