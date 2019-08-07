@@ -4,7 +4,7 @@ This is my final capstone project which implements a GUI for a role-based system
 
 **System Architecture**
 
-
+![alt text](https://github.com/alson-loo/real-time-credit-card-anomaly-detector-GUI/blob/master/architecture.png)
 
 
 
