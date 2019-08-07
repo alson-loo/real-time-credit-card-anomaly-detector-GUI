@@ -11,12 +11,12 @@ This is my final capstone project which implements a GUI for a role-based system
 **Screen Design**
 
 
-
+![alt text](https://github.com/alson-loo/real-time-credit-card-anomaly-detector-GUI/blob/master/screen_design.png)
 
 
 **User Guide**
 
-
+![alt text](https://github.com/alson-loo/real-time-credit-card-anomaly-detector-GUI/blob/master/user_guide.png)
 
 **Installation**
 
