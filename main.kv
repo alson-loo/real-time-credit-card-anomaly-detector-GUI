@@ -1,0 +1,509 @@
+#:import runpy runpy
+#:import FadeTransition kivy.uix.screenmanager.FadeTransition
+#:set status_off 'status : stop'
+#:set status_on 'status : running'
+
+WindowManager:
+    transition: FadeTransition()
+    splash: splash
+    welcome1: welcome1
+    loginpage: loginpage
+    dataamend: dataamend
+    modetype: modetype
+    modelsettings: modelsettings
+    timemodelselect: timemodelselect
+
+
+
+    SplashScreen:
+        id: splash
+    WelcomeScreen1:
+        id: welcome1
+    WelcomeScreen2:
+        id: welcome2
+    LoginPageScreen:
+        id: loginpage
+    DataAmendScreen:
+        id: dataamend
+    ModeTypeScreen:
+        id: modetype
+    ModelSettingsScreen:
+        id: modelsettings
+
+    TimeModelSelectScreen:
+        id: timemodelselect
+
+
+
+<ConfirmPopup>:
+    auto_dismiss: False
+    size_hint: 0.5, 0.5
+    title: 'Confirm to delete all previous models and settings'
+    BoxLayout:
+        orientation: 'horizontal'
+        Button:
+            text: 'Yes'
+            on_release:
+                app.root.current='modelsettings'
+                runpy.run_path('./script/startnew.py')
+                root.dismiss()
+        Button:
+            text: 'No'
+            on_release:
+                root.dismiss()
+
+
+<SplashScreen>:
+    name: "splash"
+    on_touch_down: app.root.current = "welcome1"
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: './data/images/bg.jpg'
+    Image:
+        source: './data/images/logo.png'
+        size_hint: 0.5, 0.5
+        pos_hint: {'top': 0.75, 'right': 0.75 }
+
+
+<WelcomeScreen1>:
+    name: "welcome1"
+    on_touch_down: app.root.current = "welcome2"
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: './data/images/bg.jpg'
+    Label:
+        font_size : 2*((root.width**2 + root.height**2) / 14**4)
+        pos_hint: {"center_x":0.5, "center_y":0.5}
+        bold: True
+        line_height: 1
+        halign: 'center'
+        text: 'Realtime Neural Network \nCredit Card Fraud \nDetector'
+
+
+<WelcomeScreen2>:
+    name: "welcome2"
+    on_touch_down: app.root.current = "loginpage"
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: './data/images/bg.jpg'
+    Label:
+        font_size: 2*((root.width**2 + root.height**2) / 14**4)
+        bold: True
+        line_height: 2
+        halign: 'center'
+        text: 'Welcome'
+
+
+<LoginPageScreen>:
+    name: "loginpage"
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: './data/images/bg.jpg'
+    FloatLayout:
+        Label:
+            id: lbl_status
+            bold: True
+            text: status_off
+            font_size: 0.5*((root.width**2 + root.height**2) / 14**4)
+            size_hint: 0.8, 0.2
+            pos_hint: {"top":0.12, "x": 0.5}
+            halign: 'center'
+        Label:
+            text: 'USER LOGIN'
+            bold: True
+            font_size: 2*((root.width**2 + root.height**2) / 14**4)
+            size_hint: 0.8, 0.2
+            pos_hint: {"top":1, "x": 0.1}
+            halign: 'center'
+        Label:
+            size_hint: 0.5,0.12
+            pos_hint: {"x":0, "top":0.7}
+            text: "Username: "
+            font_size: (root.width**2 + root.height**2) / 14**4
+        TextInput:
+            pos_hint: {"x":0.5, "top":0.7}
+            size_hint: 0.4, 0.12
+            id: user
+            multiline: False
+            font_size: (root.width**2 + root.height**2) / 14**4
+        Label:
+            size_hint: 0.5,0.12
+            pos_hint: {"x":0, "top":0.7-0.13}
+            text: "Password: "
+            font_size: (root.width**2 + root.height**2) / 14**4
+        TextInput:
+            pos_hint: {"x":0.5, "top":0.7-0.13}
+            size_hint: 0.4, 0.12
+            id: passw
+            password: True # hide password
+            multiline: False
+            font_size: (root.width**2 + root.height**2) / 14**4
+        Button:
+            pos_hint:{"x":0.2,"y":0.05}
+            size_hint: 0.6, 0.15
+            text: "Submit"
+            font_size: (root.width**2 + root.height**2) / 14**4
+            on_release:
+                root.verify_credentials()
+                if root.check_new(): app.root.ids['modetype'].ids['btn_continue'].disabled = True
+                else : app.root.ids['modetype'].ids['btn_continue'].disabled = False
+
+                
+<ModeTypeScreen>
+    name:'modetype'
+    btn_modetype_new: btn_modetype_new
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: './data/images/bg.jpg'
+    FloatLayout:
+        Label:
+            id: lbl_status
+            bold: True
+            text: status_off
+            font_size: 0.5*((root.width**2 + root.height**2) / 14**4)
+            size_hint: 0.8, 0.2
+            pos_hint: {"top":0.12, "x": 0.5}
+            halign: 'center'
+        Label:
+            size_hint: 0.5,0.12
+            pos_hint: {"center_x":0.5,"center_y":0.9}
+            text: "Start new to delete all old models and databases"
+            font_size: 0.5 * (root.width**2 + root.height**2) / 14**4
+        Button:
+            id: btn_modetype_new
+            pos_hint:{"center_x":0.5,"center_y":0.9-0.13}
+            size_hint: 0.6, 0.15
+            text: "Start New"
+            font_size: (root.width**2 + root.height**2) / 14**4
+            on_release:
+                root.confirm_popup()
+                root.manager.ids["modelsettings"].ids["btn_timemodelselect"].disabled = True
+        Label:
+            size_hint: 0.5,0.12
+            pos_hint: {"center_x":0.5,"center_y":0.9-0.13-0.13}
+            text: "Continue to use previous settings and databases"
+            font_size: 0.5 * (root.width**2 + root.height**2) / 14**4
+        Button:
+            id: btn_continue
+            pos_hint:{"center_x":0.5,"center_y":0.9-0.13-0.13-0.13}
+            size_hint: 0.6, 0.15
+            text: "Continue"
+            font_size: (root.width**2 + root.height**2) / 14**4
+            on_release: root.manager.current = "timemodelselect"
+        Button:
+            id: btn_exit
+            pos_hint:{"center_x":0.5,"center_y":0.95-0.13-0.13-0.13-0.13-0.13-0.13}
+            size_hint: 0.6, 0.15
+            text: "EXIT"
+            bold: True
+            background_normal: ''
+            background_color: 1,0,0,1
+            font_size: (root.width**2 + root.height**2) / 14**4
+            on_release: app.stop()
+
+
+<ModelSettingsScreen>:
+    name: "modelsettings"
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: './data/images/bg.jpg'
+    FloatLayout:
+        Label:
+            id: lbl_status
+            bold: True
+            text: status_off
+            font_size: 0.5*((root.width**2 + root.height**2) / 14**4)
+            size_hint: 0.8, 0.2
+            pos_hint: {"top":0.12, "x": 0.5}
+            halign: 'center'
+        Label:
+            bold: True
+            size_hint: 0.8,0.2
+            pos_hint: {"x":0.1, "top":1}
+            text: "MODEL SETTINGS PAGE"
+            font_size: 2*((root.width**2 + root.height**2) / 14**4)
+        Spinner:
+            id: spn_scalertype
+            size_hint: 0.45,0.12
+            pos_hint: {"x":0.1, "top":0.95-0.13}
+            text: "Scaler Type"
+            values: 'Scaler:StandardScaler', 'Scaler:MinMaxScaler'
+            font_size: (root.width**2 + root.height**2) / 14**4
+        Spinner:
+            id: spn_shuffletype
+            size_hint: 0.3,0.12
+            pos_hint: {"x":0.6, "top":0.95-0.13}
+            text: "Shuffle?"
+            values: 'Shuffle:Yes', 'Shuffle:No'
+            font_size: (root.width**2 + root.height**2) / 14**4
+        Label:
+            size_hint: 0.1,0.12
+            pos_hint: {"x":0.2, "top":0.95-0.13-0.13}
+            text: "Test/Train Split(0-1) : "
+            font_size: (root.width**2 + root.height**2) / 14**4
+        TextInput:
+            pos_hint: {"x":0.5, "top":0.95-0.13-0.13}
+            size_hint: 0.4, 0.12
+            id: tt_split
+            hint_text: "from 0.0-1.0 (decimals)"
+            text: "0.8"
+            multiline: False
+            input_filter: 'float'
+            font_size: (root.width**2 + root.height**2) / 14**4
+        Label:
+            size_hint: 0.1,0.12
+            pos_hint: {"x":0.2, "top":0.95-0.13-0.13-0.13}
+            text: "Epochs (integers): "
+            font_size: (root.width**2 + root.height**2) / 14**4
+        TextInput:
+            pos_hint: {"x":0.5, "top":0.95-0.13-0.13-0.13}
+            size_hint: 0.4, 0.12
+            id: epoch
+            hint_text: "from 1 (int)"
+            text: "10"
+            multiline: False
+            input_filter: 'int'
+            font_size: (root.width**2 + root.height**2) / 14**4
+        Label:
+            size_hint: 0.1,0.12
+            pos_hint: {"x":0.2, "top":0.95-0.13-.13-0.13-0.13}
+            text: "Batch size (integers): "
+            font_size: (root.width**2 + root.height**2) / 14**4
+        TextInput:
+            pos_hint: {"x":0.5, "top":0.95-0.13-0.13-0.13-0.13}
+            size_hint: 0.4, 0.12
+            id: batch
+            hint_text: "larger number faster, inaccurate"
+            text: "100"
+            multiline: False
+            input_filter: 'int'
+            font_size: (root.width**2 + root.height**2) / 14**4
+        Button:
+            id: btn_checkvaluesrun
+            pos_hint:{"x":0.1,"y":0.05}
+            size_hint: 0.33, 0.15
+            text: "Start training"
+            font_size: (root.width**2 + root.height**2) / 14**4
+            on_release:
+                root.check_values_and_run()
+                root.ids["btn_timemodelselect"].disabled = False
+        Button:
+            id: btn_timemodelselect
+            pos_hint:{"x":0.56,"y":0.05}
+            size_hint: 0.33, 0.15
+            text: "Next Settings"
+            font_size: (root.width**2 + root.height**2) / 14**4
+            on_release: root.manager.current = 'timemodelselect'
+
+
+<TimeModelSelectScreen>:
+    name: "timemodelselect"
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: './data/images/bg.jpg'
+    FloatLayout:
+        Label:
+            id: lbl_status
+            bold: True
+            text: status_off
+            font_size: 0.5*((root.width**2 + root.height**2) / 14**4)
+            size_hint: 0.8, 0.2
+            pos_hint: {"top":0.12, "x": 0.5}
+            halign: 'center'
+        Label:
+            bold: True
+            size_hint: 0.5,0.2
+            pos_hint: {"center_x":0.5, "top":1}
+            text: "TIME MODEL SELECTION SETTINGS PAGE"
+            font_size: 1.5*((root.width**2 + root.height**2) / 14**4)
+        Spinner:
+            id: spn_selectmodel
+            size_hint: 0.42,0.12
+            pos_hint: {"x":0.3, "top":0.95-0.13}
+            text: "Select Predict Model"
+            font_size: (root.width**2 + root.height**2) / 14**4
+            on_press:
+                self.values = root.get_h5()
+            on_text:
+                root.ids['btn_run'].disabled=False
+                root.check_model()
+        Label:
+            size_hint: 0.1,0.12
+            pos_hint: {"x":0.2, "top":0.95-0.13-0.2}
+            text: "Set Time for retraining daily : "
+            font_size: (root.width**2 + root.height**2) / 14**4
+        TextInput:
+            id: settime
+            pos_hint: {"x":0.55, "top":0.95-0.13-0.2}
+            size_hint: 0.4, 0.12
+            hint_text: 'HH:MM::SS default 00:00:00'
+            text: "00:00:00"
+            multiline: False
+            input_filter:
+            font_size: (root.width**2 + root.height**2) / 14**4
+        Button:
+            id: btn_return_mode
+            pos_hint:{"x":0.05,"y":0.25}
+            size_hint: 0.4, 0.15
+            text: "Return to MODE menu"
+            font_size: (root.width**2 + root.height**2) / 14**4
+            on_release:
+                root.manager.current = 'modetype'
+        Button:
+            id: btn_switch_user
+            pos_hint:{"x":0.55,"y":0.25}
+            size_hint: 0.4, 0.15
+            text: "Switch User"
+            font_size: (root.width**2 + root.height**2) / 14**4
+            on_release:
+                root.manager.ids["loginpage"].ids['user'].text=''
+                root.manager.ids["loginpage"].ids['passw'].text=''
+                root.manager.current='loginpage'
+                status=1
+        Button:
+            id: btn_run
+            pos_hint:{"x":0.05,"y":0.05}
+            size_hint: 0.4, 0.15
+            text: "RUN"
+            bold: True
+            font_size: (root.width**2 + root.height**2) / 14**4
+            background_normal: ''
+            background_color: (0,1,0,0.5)
+            disabled: True
+            on_press:
+                root.check_time_selection()
+                self.disabled=True
+                root.ids['btn_stop'].disabled=False
+                root.ids['lbl_status'].text=status_on
+                root.run_thread()
+                app.root.ids['modetype'].ids['btn_modetype_new'].disabled=True
+                app.root.ids['modetype'].ids['btn_exit'].disabled=True
+                app.root.modetype.ids['lbl_status'].text=status_on
+                app.root.loginpage.ids['lbl_status'].text=status_on
+                app.root.modelsettings.ids['lbl_status'].text=status_on
+        Button:
+            id: btn_stop
+            pos_hint:{"x":0.55,"y":0.05}
+            size_hint: 0.4, 0.15
+            text: "STOP"
+            bold: True
+            disabled: True
+            font_size: (root.width**2 + root.height**2) / 14**4
+            background_normal: ''
+            background_color: (1,0,0,0.5)
+            on_press:
+                root.stop_thread()
+                self.disabled=True
+                root.ids['btn_run'].disabled=False
+                root.ids['lbl_status'].text=status_off
+                app.root.ids['modetype'].ids['btn_modetype_new'].disabled=False
+                app.root.ids['modetype'].ids['btn_exit'].disabled=False
+                app.root.modetype.ids['lbl_status'].text=status_off
+                app.root.loginpage.ids['lbl_status'].text=status_off
+                app.root.modelsettings.ids['lbl_status'].text=status_off
+
+
+
+<DataAmendScreen>:
+    name: "dataamend"
+    BoxLayout:
+        orientation: 'vertical'
+        BoxLayout:
+            size_hint_y: 0.1
+            Label:
+                #font_size: int(0.5(root.width**2 + root.height**2) / 14**4)
+                text: 'Description'
+                bold: True
+        BoxLayout:
+            RecycleView:
+                id: rv
+                data: [{'text':"{}".format(Id)} for Id in root.rows]
+                viewclass: "Label"
+                RecycleBoxLayout:
+                    default_size: None, dp(56)
+                    default_size_hint: 1, None
+                    size_hint_y: None
+                    height: self.minimum_height
+                    orientation: "vertical"
+        BoxLayout:
+            size_hint_y: 0.3
+            BoxLayout:
+                size_hint_x: 0.2
+                orientation: 'vertical'
+                ToggleButton:
+                    id: tog_analyst_search
+                    text: 'Get Data'
+                    font_size: 0.5*((root.width**2 + root.height**2) / 14**4)
+                    group: 'type'
+                    state: 'down'
+                    on_state:
+                        if self.state=='normal': root.ids['btn_zeros'].disabled=True
+                        else: root.ids['btn_zeros'].disabled=False
+                        if self.state=='normal': root.ids['btn_ones'].disabled=True
+                        else: root.ids['btn_ones'].disabled=False
+                        if self.state=='normal': root.ids['btn_amend'].disabled=False
+                        else: root.ids['btn_amend'].disabled=True
+                        if self.state=='normal': root.ids['ti_id_amend'].disabled=False
+                        else: root.ids['ti_id_amend'].disabled=True
+                        if self.state=='normal': root.ids['btn_amend'].disabled=False
+                        else: root.ids['btn_amend'].disabled=True
+                ToggleButton:
+                    id: tog_analyst_amend
+                    text: 'Amend'
+                    font_size: 0.5*((root.width**2 + root.height**2) / 14**4)
+                    group: 'type'
+                    halign: 'center'
+            BoxLayout:
+                BoxLayout:
+                    orientation: 'vertical'
+                    Button:
+                        id: btn_zeros
+                        text: "Get Fraud Data: 0\nClick to refresh"
+                        disabled: False
+                        on_press: root.get_zeros()
+                        halign: 'center'
+                    Button:
+                        id: btn_ones
+                        text: "Get Non-Fraud Data: 1\nClick to refresh"
+                        disabled: False
+                        on_press: root.get_ones()
+                        halign: 'center'
+                BoxLayout:
+                    orientation: 'vertical'
+                    TextInput:
+                        id: ti_id_amend
+                        hint_text: "one integer"
+                        text: ""
+                        multiline: False
+                        input_filter: 'int'
+                        font_size: (root.width**2 + root.height**2) / 14**4
+                        disabled: True
+                    Button:
+                        id: btn_amend
+                        text: "Amend data"
+                        disabled: True
+                        on_press:
+                            root.amend()
+                BoxLayout:
+                    Button:
+                        text: 'Switch User'
+                        on_press:
+                            root.manager.current = root.manager.previous()
+                            root.manager.ids["loginpage"].ids['user'].text=''
+                            root.manager.ids["loginpage"].ids['passw'].text=''
+
+
