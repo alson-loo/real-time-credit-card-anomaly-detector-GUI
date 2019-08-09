@@ -1,2 +1,4 @@
 url: "https://github.com/alson-loo/real-time-credit-card-anomaly-detector-GUI"
   - jekyll-sitemap
+
+theme: jekyll-theme-modernist
