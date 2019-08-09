@@ -1,5 +1,8 @@
-theme: jekyll-theme-cayman
-
+#General Jekyll Config
+highlighter: rouge
+name: Real-time credit card anomaly detector with GUI
+description: Role-based access detector using Multi-Layer Perceptron
+exclude: [LICENSE, .gitignore, Gemfile, README.md]
 plugins:
   - jekyll-seo-tag
 
