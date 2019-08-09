@@ -4,14 +4,14 @@ This is my final capstone project which implements a GUI for a role-based system
 
 **System Architecture**
 
-![alt text](https://github.com/alson-loo/real-time-credit-card-anomaly-detector-GUI/blob/master/architecture.png)
+![alt text](https://github.com/alson-loo/real-time-credit-card-anomaly-detector-GUI/blob/master/images/architecture.png)
 
 
 
 **Screen Design**
 
 
-![alt text](https://github.com/alson-loo/real-time-credit-card-anomaly-detector-GUI/blob/master/screen_design.png)
+![alt text](https://github.com/alson-loo/real-time-credit-card-anomaly-detector-GUI/blob/master/images/screen_design.png)
 
 
 **User Guide**
@@ -20,7 +20,7 @@ Please download the kaggle credit card fraud dataset and place the csv file in t
 https://www.kaggle.com/mlg-ulb/creditcardfraud/version/3
 
 
-![alt text](https://github.com/alson-loo/real-time-credit-card-anomaly-detector-GUI/blob/master/user_guide.png)
+![alt text](https://github.com/alson-loo/real-time-credit-card-anomaly-detector-GUI/blob/master/images/user_guide.png)
 
 **Installation**
 
