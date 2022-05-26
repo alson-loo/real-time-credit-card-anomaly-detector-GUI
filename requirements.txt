@@ -1,7 +1,7 @@
 keras-gpu==2.2.4
 joblib==0.13.2
 numpy==1.16.4
-tensorflow-gpu==1.13.1
+tensorflow-gpu==2.7.2
 pandas==0.24.2
 scikit_learn==0.21.2
 Kivy==1.11.1
